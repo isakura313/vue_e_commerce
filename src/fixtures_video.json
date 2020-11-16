@@ -1,0 +1,50 @@
+{
+"products":[
+    { "id": 205213585,
+      "title": "Видеокарта Palit RTX 3070 GAMINGPRO",
+      "description": "Видеокарта Palit PCI-E 4.0 PA-RTX3070 GAMINGPRO 8G NV RTX3070 8192Mb 256 GDDR6 1500/14000/HDMIx1/DPx",
+      "price": 59250 ,
+      "image": "https://cdn1.ozone.ru/s3/multimedia-y/wc1200/6028177630.jpg",
+      "available": 20,
+      "rating": 5,
+      "discount": false
+    },
+    { "id": 205213586,
+        "title": "Видеокарта Gigabyte RTX 3070 GAMING OC (GV-N3070GAMING OC-8GD)",
+        "description": "Видеокарта Gigabyte PCI-E 4.0 GV-N3070GAMING OC-8GD NV RTX3070 8192Mb 256 GDDR6 1815/14000/HDMIx2/DP",
+        "price": 58035,
+        "image": "https://cdn1.ozone.ru/s3/multimedia-m/wc1200/6028177618.jpg",
+        "available": 20,
+        "rating": 5,
+        "discount": true
+      },
+
+      { "id": 200750095,
+        "title": "Видеокарта nVidia GeForce GTX1660 Super Palit GamingPro OC PCI-E 6144Mb (NE6166SS18J9-1160A)",
+        "description": "",
+        "price": "",
+        "image": "https://cdn1.ozone.ru/s3/multimedia-o/wc1200/6025178460.jpg",
+        "available": 0,
+        "rating": 5,
+        "discount": false
+      },
+      { "id": 177012662,
+        "title": "Видеокарта MSI Radeon RX 5500 XT MECH OC 8GB",
+        "description": "Radeon RX 5500 XT на основе архитектуры Radeon RDNA обеспечивает исключительную производительность и высокую точность изображения в играх.",
+        "price": 18468,
+        "image": "https://cdn1.ozone.ru/s3/multimedia-j/wc1200/6008404039.jpg",
+        "available": 40,
+        "rating": 5,
+        "discount": true
+      },
+      { "id": 196109079,
+        "title": "Видеокарта AFOX GeForce GTX 1050 Ti 4096Mb V3 (AF1050TI-4096D5H2-V3)",
+        "description": "коробка, инструкция, диск ПО, видеокарта",
+        "price": 10799,
+        "image": "https://cdn1.ozone.ru/s3/multimedia-3/wc1200/6008463387.jpg",
+        "available": 5,
+        "rating": 4,
+        "discount": true
+      }
+]
+}
