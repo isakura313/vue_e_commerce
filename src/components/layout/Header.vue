@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
-        <img src="../assets/logo.png" class="logo">
+        <img src="../../assets/logo.png" class="logo">
       </a>
       <a role="button" class="navbar-burger burger" aria-label="menu"
          aria-expanded="false" data-target="navbar_ecommerce">
@@ -23,6 +23,7 @@
             <a class="button is-primary">
               <strong> Cart </strong>
             </a>
+            <button class='button is-danger'> {{countOfProducts}}</button>
         </div>
       </div>
     </div>
@@ -33,6 +34,7 @@
 <script>
 export default {
   name: 'Header',
+  props: ['countOfProducts'],
 };
 </script>
 
