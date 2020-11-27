@@ -2,14 +2,24 @@
   <div class="wrapper">
     <div class="columns">
       <div class="column">
-        <h1 class="title is-size-3 has-text-centered" v-text="title"> </h1>
+        <h1 class="title is-size-3 has-text-centered" v-text="title"></h1>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-offset-2">
+        <div class="select is-primary is-large">
+          <select v-model="sortBy" @change="sortProducts">
+            <option value="asc" selected>От дешевого к дорогому</option>
+            <option value="desc">От дорогих к дешевым</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="columns is-multiline main_wrap">
-      <Card v-for='item in info'
-            :newPrice = 'item.new_price'
+      <Card v-for='item in books'
+            :newPrice='item.new_price'
             :key='item.id'
-            :id = 'item.id'
+            :id='item.id'
             :image='item.image'
             :rating='item.rating'
             :title='item.title'
@@ -24,6 +34,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Card from '../components/Card.vue';
 
 export default {
@@ -33,25 +44,28 @@ export default {
   },
   data() {
     return {
-      info: [],
       title: 'Отдел книг',
       cart: [],
+      sortBy: 'asc',
     };
   },
   methods: {
     addProduct(item) {
       this.$store.commit('SET_CART', item);
     },
+    sortProducts() {
+      return this.$store.dispatch('initBooks', this.sortBy);
+    },
   },
   computed: {
     cartItemCount() {
       return this.cart.length;
     },
+    ...mapGetters([
+      'books']),
   },
   async created() {
-    const response = await fetch('/json/full.json');
-    this.info = await response.json();
-    this.info = this.info.books;
+    return this.$store.dispatch('initBooks', 'asc');
   },
 };
 </script>
@@ -60,7 +74,8 @@ export default {
 .main_wrap {
   margin: 0 10em;
 }
-@media all and (max-width: 680px){
+
+@media all and (max-width: 680px) {
   .main_wrap {
     margin: 0 1em;
   }
