@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="columns">
       <div class="column">
-        <h1 class="title is-size-3 has-text-centered" v-text="title"></h1>
+        <h1 class="title is-size-3 has-text-centered"> {{ this.$route.params.product_name }} </h1>
       </div>
     </div>
     <div class="columns">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="columns is-multiline main_wrap">
-      <Card v-for='item in books'
+      <Card v-for='item in products'
             :newPrice='item.new_price'
             :key='item.id'
             :id='item.id'
@@ -38,14 +38,13 @@ import { mapGetters } from 'vuex';
 import Card from '../components/Card.vue';
 
 export default {
-  name: 'Books',
+  name: 'Section',
   components: {
     Card,
   },
   data() {
     return {
       title: 'Отдел книг',
-      cart: [],
       sortBy: 'asc',
     };
   },
@@ -54,18 +53,29 @@ export default {
       this.$store.commit('SET_CART', item);
     },
     sortProducts() {
-      return this.$store.dispatch('initBooks', this.sortBy);
+      return this.$store.dispatch('initProducts', {
+        product: this.$route.params.product_name,
+        sort: this.sortBy,
+      });
     },
   },
   computed: {
-    cartItemCount() {
-      return this.cart.length;
-    },
     ...mapGetters([
-      'books']),
+      'products']),
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.$store.dispatch('initProducts', {
+      product: to.params.product_name,
+      sort: this.sortBy,
+    });
+    next();
   },
   async created() {
-    return this.$store.dispatch('initBooks', 'asc');
+    return this.$store.dispatch('initProducts',
+      {
+        product: this.$route.params.product_name,
+        sort: this.sortBy,
+      });
   },
 };
 </script>

@@ -8,40 +8,40 @@ export default new Vuex.Store({
   state: {
     sort_by: 'new_price',
     cart: [],
-    books: [],
-    videocards: [],
+    products: [], // здесь добавляем небольшое упрощение
   },
   getters: {
     cart: (state) => state.cart,
-    books: (state) => state.books,
+    products: (state) => state.products,
   },
   actions: {
-    initBooks: ({ commit }, sortArg) => {
+    initProducts: ({ commit }, payload) => {
       axios.get('/json/full.json')
         .then((response) => {
-          if (sortArg === 'asc') {
-            commit('SET_BOOKS_ASC', response.data.books);
+          if (payload.sort === 'asc') {
+            commit('SET_PRODUCTS_ASC', response.data[`${payload.product}`]);
           }
-          if (sortArg === 'desc') {
-            commit('SET_BOOKS_DESC', response.data.books);
+          if (payload.sort === 'desc') {
+            commit('SET_PRODUCTS_DESC', response.data[`${payload.product}`]);
           }
         });
     },
   },
   mutations: {
-    SET_BOOKS_ASC(state, books) {
-      state.books = [...books].sort((a, b) => {
-        if (a[state.sort_by] > b[state.sort_by]) {
-          return 1;
-        }
-        if (a[state.sort_by] < b[state.sort_by]) {
-          return -1;
-        }
-        return 0;
-      });
+    SET_PRODUCTS_ASC(state, products) {
+      state.products = products;
+      // state.products = [...products].sort((a, b) => {
+      //   if (a[state.sort_by] > b[state.sort_by]) {
+      //     return 1;
+      //   }
+      //   if (a[state.sort_by] < b[state.sort_by]) {
+      //     return -1;
+      //   }
+      //   return 0;
+      // });
     },
-    SET_BOOKS_DESC(state, books) {
-      state.books = [...books].sort((a, b) => {
+    SET_PRODUCTS_DESC(state, products) {
+      state.products = [...products].sort((a, b) => {
         if (a[state.sort_by] < b[state.sort_by]) {
           return 1;
         }

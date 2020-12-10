@@ -22,12 +22,12 @@
           </router-link>
         </div>
         <div class="navbar-item">
-          <router-link to="/books">
+          <router-link to="/section/books">
             Книги
           </router-link>
         </div>
         <div class="navbar-item">
-          <router-link to="/videocards">
+          <router-link to="/section/videocards">
             Видеокарты
           </router-link>
         </div>

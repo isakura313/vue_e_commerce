@@ -91,7 +91,7 @@ export default {
   async created() {
     const response = await fetch('/json/full.json');
     this.info = await response.json();
-    this.info = [...this.info.video, ...this.info.books].filter((data) => data.id
+    this.info = [...this.info.videocards, ...this.info.books].filter((data) => data.id
       === Number(this.$route.params.id));
   },
 };
