@@ -7,7 +7,7 @@
     </div>
     <div class="columns">
       <div class="column is-offset-2">
-        <div class="select is-primary is-large">
+        <div class="select is-primary">
           <select v-model="sortBy" @change="sortProducts">
             <option value="asc" selected>От дешевого к дорогому</option>
             <option value="desc">От дорогих к дешевым</option>
@@ -82,7 +82,7 @@ export default {
 
 <style scoped>
 .main_wrap {
-  margin: 0 10em;
+  margin: 0 3rem;
 }
 
 @media all and (max-width: 680px) {

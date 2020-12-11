@@ -12,15 +12,11 @@
       </p>
       <p class="card__price is-size-5 has-text-weight-bold" v-else>
         {{ price | formatPrice }} </p>
-      <p class="card__available is-size-6"> В наличии {{ available }} </p>
+      <p class="card__available is-size-6"> В наличии <span class="has-text-weight-bold">
+        {{ available }}
+      </span>  </p>
       <button class="button" v-show="canBuy">Нет в наличии</button>
       <button class="button is-danger"  @click="deleteFromCart">Удалить</button>
-
-<!--      <select v-model="selected">-->
-<!--        <option v-for="option in available" v-bind:value="option.value">-->
-<!--          {{ option.text }}-->
-<!--        </option>-->
-<!--      </select>-->
     </div>
 
 </template>
@@ -35,9 +31,6 @@ export default {
     return {
       addInfo: 'Добавить в корзину',
       addInfoColor: 'button is-link is-pulled-right',
-      // availableCount: () => {
-      //   return
-      // }
     };
   },
   props: {
@@ -105,12 +98,13 @@ export default {
   padding: 10px 10px 30px 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 2px solid black;
 }
 
 .cart__img {
-  /*height: 150px;*/
-  width: 150px;
+  height: 150px;
+  width: 400px;
   padding: 7px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -121,7 +115,10 @@ export default {
   width: 45px;
   height: 45px;
 }
-
+.card__title{
+  padding: 0 2em;
+  text-align: left;
+}
 .card__title:hover {
   color: blue;
   cursor: pointer;

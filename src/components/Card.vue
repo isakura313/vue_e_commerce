@@ -11,9 +11,9 @@
         </button>
       </div>
       <StarRating
-        increment="0.1"
-        read-only="true"
-        star-size="20"
+        :increment=0.1
+        :read-only=true
+        :star-size=20
         active-color="#ff8970"
         :show-rating="false"
         :rating="rating"

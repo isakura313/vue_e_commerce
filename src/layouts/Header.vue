@@ -43,11 +43,8 @@
               <strong>Поиск</strong>
             </a>
             <router-link to="/cart">
-              <button class="button is-light">
-                Корзина
                 <ion-icon name="cart-outline" size="large"></ion-icon>
                 {{ cart.length }}
-              </button>
             </router-link>
           </div>
         </div>

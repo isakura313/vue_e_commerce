@@ -1,6 +1,6 @@
 <template>
   <div class="cart columns">
-    <div class="column is-half is-full-mobile">
+    <div class="column is-10 is-full-mobile">
       <CartItem v-for='item in cart'
                 :newPrice='item.new_price'
                 :key='item.id'
