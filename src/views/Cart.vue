@@ -9,6 +9,7 @@
                 :rating='item.rating'
                 :title='item.title'
                 :discount='item.discount'
+                :count = 'item.count'
                 :price='item.price'
                 :available='item.available'
                 v-on:deleteItem='deleteItemFromCart(item.id)'

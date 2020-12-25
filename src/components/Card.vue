@@ -31,7 +31,7 @@
         {{ price | formatPrice }} </p>
       <p class="card__available is-size-6"> В наличии {{ available }} </p>
       <button v-bind:class="addInfoColor"
-              v-on:click.once="addProductToCart" v-if="available"> {{addInfo}}
+              v-on:click="addProductToCart" v-if="available"> {{ addInfo }}
       </button>
       <button class="button" v-show="canBuy">Нет в наличии</button>
     </div>

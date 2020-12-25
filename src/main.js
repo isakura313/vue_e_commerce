@@ -1,11 +1,13 @@
 import Vue from 'vue';
+import 'buefy/dist/buefy.css';
+import Buefy from 'buefy';
 import VueRouter from 'vue-router';
 import App from './App.vue';
 import router from './router';
-import 'bulma/css/bulma.css';
 import store from './store';
 
 Vue.use(VueRouter);
+Vue.use(Buefy);
 Vue.config.productionTip = false;
 
 new Vue({

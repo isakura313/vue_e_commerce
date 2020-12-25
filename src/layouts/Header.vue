@@ -42,9 +42,13 @@
             <a class="button is-primary">
               <strong>Поиск</strong>
             </a>
-            <router-link to="/cart">
-                <ion-icon name="cart-outline" size="large"></ion-icon>
+            <router-link to="/cart" class="navbar-item">
+              <img src="../assets/shopping-cart.png" alt="корзина иконка">
                 {{ cart.length }}
+            </router-link>
+            <router-link to="favorites" class="navbar-item">
+              <img src="../assets/heart.png" alt="избранное иконка">
+                {{ favorites.length }}
             </router-link>
           </div>
         </div>
@@ -75,6 +79,7 @@ export default {
   computed: {
     ...mapGetters([
       'cart',
+      'favorites',
     ]),
   },
 };

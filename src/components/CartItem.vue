@@ -1,23 +1,26 @@
 <template>
 
-    <div class="cart_item">
-      <div class="cart__img" v-bind:style="{backgroundImage: `url(${image})`}"></div>
-      <router-link :to="'/product/' + id">
-        <h3 class="card__title is-size-5"> {{ title }} </h3>
-      </router-link>
-      <p class="card__price is-size-5"
-         v-if="discount">
-        <span class="has-text-danger has-text-weight-bold">{{ newPrice | formatPrice }} </span>
-        <del class="has-text-grey">{{ price | formatPrice }}</del>
-      </p>
-      <p class="card__price is-size-5 has-text-weight-bold" v-else>
-        {{ price | formatPrice }} </p>
-      <p class="card__available is-size-6"> В наличии <span class="has-text-weight-bold">
+  <div class="cart_item">
+    <div class="cart__img" v-bind:style="{backgroundImage: `url(${image})`}"></div>
+    <router-link :to="'/product/' + id">
+      <h3 class="card__title is-size-5"> {{ title }} </h3>+
+    </router-link>
+    <p class="card__price is-size-5"
+       v-if="discount">
+      <span class="has-text-danger has-text-weight-bold">{{ newPrice | formatPrice }} </span>
+      <del class="has-text-grey">{{ price | formatPrice }}</del>
+    </p>
+    <p class="card__price is-size-5 has-text-weight-bold" v-else>
+      {{ price | formatPrice }} </p>
+    <p class="card__count is-size-6"> Вы заказали <span class="has-text-weight-italic">
+        {{ count }}
+      </span></p>
+    <p class="card__available is-size-6"> В наличии <span class="has-text-weight-bold">
         {{ available }}
-      </span>  </p>
-      <button class="button" v-show="canBuy">Нет в наличии</button>
-      <button class="button is-danger"  @click="deleteFromCart">Удалить</button>
-    </div>
+      </span></p>
+    <button class="button" v-show="canBuy">Нет в наличии</button>
+    <button class="button is-danger" @click="deleteFromCart">Удалить</button>
+  </div>
 
 </template>
 
@@ -25,8 +28,7 @@
 
 export default {
   name: 'CartItem',
-  components: {
-  },
+  components: {},
   data() {
     return {
       addInfo: 'Добавить в корзину',
@@ -42,6 +44,7 @@ export default {
     discount: Boolean,
     price: Number,
     newPrice: Number,
+    count: Number,
     available: Number,
   },
   filters: {
@@ -82,11 +85,6 @@ export default {
       }
       return false;
     },
-    // discountSize() {
-    //   // if (this.discount) {
-    //   return `${Math.round((this.price - this.newPrice) / (this.price / 100))}%`;
-    //   // }
-    // },
   },
 
 };
@@ -115,10 +113,12 @@ export default {
   width: 45px;
   height: 45px;
 }
-.card__title{
+
+.card__title {
   padding: 0 2em;
   text-align: left;
 }
+
 .card__title:hover {
   color: blue;
   cursor: pointer;
