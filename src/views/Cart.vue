@@ -1,7 +1,8 @@
 <template>
   <div class="cart columns">
     <div class="column is-10 is-full-mobile">
-      <CartItem v-for='item in cart'
+      {{ }}
+      <CartItem v-for='item in cart_filter'
                 :newPrice='item.new_price'
                 :key='item.id'
                 :id='item.id'
@@ -34,7 +35,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'cart',
+      'cart_filter',
     ]),
   },
   methods: {

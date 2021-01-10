@@ -1,54 +1,35 @@
 <template>
   <div class="home">
-    <carousel
-      :per-page="1"
-      :mouse-drag="false"
-    >
-      <slide>
-        <section class="hero is-link">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title"> {{ name }} </h1>
-              <h2 class="subtitle">
-                Огромные скидки на все
-              </h2>
+    <section class="home_section">
+      <carousel
+        :per-page="1"
+        :mouse-drag="false"
+      >
+        <slide
+          v-for="(slide, index)  in slides"
+          :key="index"
+        >
+          <section :class="slide.classSlider">
+            <div class="hero-body">
+              <div class="container">
+                <h1 class="title"> {{ slide.name }} </h1>
+                <h2 class="subtitle">
+                  {{ slide.info }}
+                </h2>
+              </div>
             </div>
-          </div>
-        </section>
-      </slide>
-      <slide>
-        <section class="hero is-danger">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title"> {{ name }} </h1>
-              <h2 class="subtitle">
-                Получите огромную скидку, просто нажав на данный слайдер
-              </h2>
-            </div>
-          </div>
-        </section>
-      </slide>
-      <slide>
-        <section class="hero is-warning">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title"> {{ name }} </h1>
-              <h2 class="subtitle">
-                Здесь могла быть ваша реклама
-              </h2>
-            </div>
-          </div>
-        </section>
-      </slide>
-    </carousel>
-    <div class="columns is-centered">
-      <PromoCard v-for="product in products"
-                 v-bind:key="product.id"
-                 :image="product.image"
-                 :name="product.name"
-                 :link="product.path"
-      />
-    </div>
+          </section>
+        </slide>
+      </carousel>
+      <div class="columns is-centered">
+        <PromoCard v-for="product in products"
+                   v-bind:key="product.id"
+                   :image="product.image"
+                   :name="product.name"
+                   :link="product.path"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -86,11 +67,30 @@ export default {
           path: 'notebooks',
         },
       ],
+      slides: [
+        {
+          classSlider: 'hero is-link',
+          name: 'E-commerce Project',
+          info: 'Огромные скидки на все',
+        },
+        {
+          classSlider: 'hero is-danger',
+          name: 'E-commerce Project',
+          info: 'Получите огромную скидку, просто нажав на данный слайдер',
+        },
+        {
+          classSlider: 'hero is-warning',
+          name: 'E-commerce Project',
+          info: 'Здесь могла быть ваша реклама',
+        },
+      ],
     };
   },
 };
 </script>
 
 <style scoped>
-
+.home_section{
+  min-height: 770px;
+}
 </style>

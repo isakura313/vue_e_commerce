@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-one-quarter-desktop is-full-mobile">
+  <div class="column is-one-quarter-desktop is-one-third-tablet is-full-mobile">
 
     <div class="card">
       <div class="card__img" v-bind:style="{backgroundImage: `url(${image})`}">
@@ -19,7 +19,7 @@
         :rating="rating"
       />
       <router-link :to="'/product/' + id">
-        <h3 class="card__title is-size-5"> {{ title | formatTitle }} </h3>
+        <h3 class="card__title is-size-6-desktop "> {{ title | formatTitle }} </h3>
       </router-link>
       <p class="card__description is-size-5" v-text="description"></p>
       <p class="card__price is-size-5"
@@ -31,16 +31,31 @@
         {{ price | formatPrice }} </p>
       <p class="card__available is-size-6"> В наличии {{ available }} </p>
       <button v-bind:class="addInfoColor"
-              v-on:click="addProductToCart" v-if="available"> {{ addInfo }}
+              id="btn_add"
+              v-on:click="addProductToCart"
+              v-if="available && !alreadyInCart">
+        {{ addInfo }}
       </button>
-      <button class="button" v-show="canBuy">Нет в наличии</button>
+      <div class="button_wrapper"
+           v-else-if="alreadyInCart">
+        <div class="buttons">
+          <button v-bind:class="newInfoColor"
+                  v-on:click="addProductToCart">
+            {{ newInfo }}
+          </button>
+          <button class="button" @click="removeFromCart(id)"> -</button>
+          <button class="button">{{ countInCart }}</button>
+          <button class="button" @click="addToCart(id)"> +</button>
+        </div>
+        <button class="button" v-show="canBuy">Нет в наличии</button>
+      </div>
+
     </div>
-
   </div>
-
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import StarRating from 'vue-star-rating';
 
 export default {
@@ -50,8 +65,10 @@ export default {
   },
   data() {
     return {
-      addInfo: 'Добавить в корзину',
-      addInfoColor: 'button is-link is-pulled-right',
+      addInfo: 'В корзину',
+      addInfoColor: 'btn_add button is-link is-pulled-right',
+      newInfo: 'В корзине',
+      newInfoColor: 'is-danger btn_add button is-link is-pulled-right',
     };
   },
   props: {
@@ -85,8 +102,9 @@ export default {
       return `${price} ₽`;
     },
     formatTitle(title) {
-      if (title.length > 28) {
-        return `${title.slice(0, 28)}...`;
+      const filterNumber = 26;
+      if (title.length > filterNumber) {
+        return `${title.slice(0, filterNumber)}...`;
       }
       return `${title}`;
     },
@@ -97,32 +115,50 @@ export default {
       this.addInfoColor = 'is-danger button is-link is-pulled-right';
       this.$emit('addToCart');
     },
+    addToCart() {
+      this.$emit('addToCart');
+      // this.$store.commit('UPDATE_COUNT_CART', id);
+    },
+    removeFromCart(id) {
+      this.$store.commit('REMOVE_COUNT_CART', id);
+    },
   },
   computed: {
+    ...mapGetters([
+      'cart',
+      'cart_filter',
+    ]),
     canBuy() {
       if (this.available === 0) {
         return true;
       }
       return false;
     },
-    // discountSize() {
-    //   // if (this.discount) {
-    //   return `${Math.round((this.price - this.newPrice) / (this.price / 100))}%`;
-    //   // }
-    // },
+    alreadyInCart() {
+      for (let i = 0; i < this.cart_filter.length; i += 1) {
+        if (this.id === this.cart_filter[i].id) {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          return true;
+        }
+      }
+      return false;
+    },
+    countInCart() {
+      const itemChange = this.cart_filter.filter((item) => item.id === this.id);
+      return itemChange[0].count || 0;
+    },
   },
-
 };
 </script>
 
 <style>
 .card {
   margin: 2em;
-  padding: 10px 10px 30px 10px;
+  padding: 10px 20px 30px 20px;
 }
 
 .card__img {
-  height: 350px;
+  height: 260px;
   width: auto;
   padding: 7px;
   background-size: contain;
@@ -132,6 +168,14 @@ export default {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
+}
+.button_wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn_add {
+  margin-top: 40px;
 }
 
 .btn_discount {

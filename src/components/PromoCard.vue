@@ -2,8 +2,8 @@
   <div class="column is-one-quarter">
     <router-link :to="'section/'+link">
       <div class="card_promo">
-        <img :src="image" alt="карточка товара" class="card_promo__img">
-        <h3 class="card_promo__h3"> {{ name }}</h3>
+        <div class="card__img" v-bind:style="{backgroundImage: `url(${image})`}"></div>
+        <h3 class="card_promo__h3 has-text-centered is-size-3"> {{ name }}</h3>
       </div>
     </router-link>
   </div>

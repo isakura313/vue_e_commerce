@@ -7,12 +7,19 @@
     </div>
     <div class="columns">
       <div class="column is-offset-2">
-        <div class="select is-primary">
-          <select v-model="sortBy" @change="sortProducts">
-            <option value="asc" selected>От дешевого к дорогому</option>
-            <option value="desc">От дорогих к дешевым</option>
-          </select>
-        </div>
+        <b-field label="Сортировка товара">
+          <b-select placeholder="От дешевого к дорогому"
+                    v-model="sortBy"
+                    @input="sortProducts">
+            <option
+              v-for="option in sortedData"
+              :value="option.val"
+              :key="option.id">
+              {{ option.sorted }}
+            </option>
+          </b-select>
+        </b-field>
+
       </div>
     </div>
     <div class="columns is-multiline main_wrap">
@@ -46,6 +53,18 @@ export default {
     return {
       title: 'Отдел книг',
       sortBy: 'asc',
+      sortedData: [
+        {
+          id: 1,
+          val: 'asc',
+          sorted: 'От дешевого к дорогому',
+        },
+        {
+          id: 2,
+          val: 'desc',
+          sorted: 'От дорогих к дешевым',
+        },
+      ],
     };
   },
   methods: {
@@ -81,13 +100,19 @@ export default {
 </script>
 
 <style scoped>
-.main_wrap {
-  margin: 0 3rem;
+.wrapper {
+  min-height: 780px;
+  margin-bottom: 300px;
 }
 
-@media all and (max-width: 680px) {
+.main_wrap {
+  padding: 0 1rem 0 6rem;
+}
+
+@media all and (min-width: 700px) {
   .main_wrap {
     margin: 0 1em;
   }
 }
+
 </style>

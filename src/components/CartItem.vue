@@ -3,9 +3,9 @@
   <div class="cart_item">
     <div class="cart__img" v-bind:style="{backgroundImage: `url(${image})`}"></div>
     <router-link :to="'/product/' + id">
-      <h3 class="card__title is-size-5"> {{ title }} </h3>+
+      <h3 class="card__title is-size-5"> {{ title }} </h3>
     </router-link>
-    <p class="card__price is-size-5"
+    <p class="card__price card_price_no_discount is-size-5"
        v-if="discount">
       <span class="has-text-danger has-text-weight-bold">{{ newPrice | formatPrice }} </span>
       <del class="has-text-grey">{{ price | formatPrice }}</del>
@@ -66,12 +66,6 @@ export default {
       }
       return `${price} ₽`;
     },
-    formatTitle(title) {
-      if (title.length > 28) {
-        return `${title.slice(0, 28)}...`;
-      }
-      return `${title}`;
-    },
   },
   methods: {
     deleteFromCart() {
@@ -94,7 +88,8 @@ export default {
 .cart_item {
   margin: 2em;
   padding: 10px 10px 30px 10px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 25% 35% 10% 10% 10% 10%;
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid black;
@@ -112,6 +107,10 @@ export default {
 .btn_discount {
   width: 45px;
   height: 45px;
+}
+.card_price_no_discount{
+  display: flex;
+  flex-direction: column;
 }
 
 .card__title {

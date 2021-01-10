@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import 'buefy/dist/buefy.css';
+import './assets/global.sass';
 import Buefy from 'buefy';
 import VueRouter from 'vue-router';
 import App from './App.vue';

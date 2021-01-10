@@ -31,6 +31,11 @@
             Видеокарты
           </router-link>
         </div>
+        <div class="navbar-item">
+          <router-link to="/section/notebooks">
+            Ноутбуки
+          </router-link>
+        </div>
       </div>
 
       <div class="navbar-end">
@@ -44,7 +49,7 @@
             </a>
             <router-link to="/cart" class="navbar-item">
               <img src="../assets/shopping-cart.png" alt="корзина иконка">
-                {{ cart.length }}
+                {{ cart_filter.length }}
             </router-link>
             <router-link to="favorites" class="navbar-item">
               <img src="../assets/heart.png" alt="избранное иконка">
@@ -78,13 +83,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'cart',
+      'cart_filter',
       'favorites',
     ]),
   },
 };
 </script>
-
-<style scoped>
-
-</style>
